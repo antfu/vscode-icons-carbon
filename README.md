@@ -8,6 +8,10 @@
 
 
 <p align="center">
+<a href="https://marketplace.visualstudio.com/items?itemName=antfu.icons-carbon" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/v/antfu.icons-carbon.svg?color=c19999&amp;label=Marketplace&logo=visual-studio-code" alt="Visual Studio Marketplace Version" /></a>
+</p>
+
+<p align="center">
 <img src="https://github.com/antfu/vscode-icons-carbon/blob/master/preview.png?raw=true"/>
 </p>
 
