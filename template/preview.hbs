@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ fontName }}</title>
+
+    <style type="text/css">
+
+        html {
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
+        body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+            margin: 0;
+            padding: 0;
+            font-weight: normal;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        body {
+            font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+            margin: 0;
+            padding: 10px 20px;
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+
+        h1 {
+            font-weight: bold;
+            margin: 24px;
+        }
+
+        .icon {
+            width: 100px;
+            display: inline-block;
+            margin: 8px;
+        }
+
+        .icon:hover {
+            cursor: pointer;
+        }
+        
+        .icon:hover .inner {
+            box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.24);
+        }
+
+        .icon .inner {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            background-color: white;
+            box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.06);
+            border-radius: 4px;
+            transition: all .3s ease-in-out;
+        }
+
+        .icon .inner {{ baseTag }} {
+            padding: 16px 0;
+            font-size: 48px;
+            color: #333;
+            overflow: hidden;            
+        }
+
+        .icon .inner::before {
+            overflow: hidden;
+        }
+
+        .label {
+            margin-top: 8px;
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 4px;
+            font-size: 10px;
+            color: #666;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        #search {
+            display: flex;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 16px;
+            margin: 0 auto;
+            max-width: 900px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(0,0,0,.1);
+            box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        #search:focus {
+            outline: none !important;
+            border-color: #18a0fb;
+        }
+
+        #copier {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        #notification {
+            position: fixed;
+            margin: auto;
+            bottom: 40px;
+            left: 50%;
+            width: auto;
+            transform: translateX(-50%);
+            color: white;
+            background-color: #212121;
+            padding: 8px 24px;
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity .3s ease-in-out;
+            box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        #notification-id {
+            font-weight: bold;
+        }
+
+        #notification.show{
+            opacity: .9;
+        }
+
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="{{ htmlCssRelativePath }}" />
+</head>
+<body>
+
+    <h1>{{ fontName }}</h1>
+
+    <input type="text" id="search" placeholder="Search for icon names">
+
+    <div id="icons">
+    {{# each names }}
+        <div class="icon" data-name="{{ this }}" title="{{ this }}">
+            <span class="inner">
+                <{{ ../baseTag }} class="fluent-icons {{ ../classPrefix }}{{ this }}"></{{ ../baseTag }}>
+            </span>
+            <br>
+            <span class='label'>{{ this }}</span>
+        </div>
+    {{/ each }}
+    </div>
+
+    <div id="notification">📋 Copied: <span id="notification-id"></span></div>
+    <input type="text" id="copier">
+
+<script type="text/javascript">
+    let icons = document.getElementsByClassName('icon');
+    let copier = document.getElementById('copier');
+    let notification = document.getElementById('notification');
+    let notificationText = document.getElementById('notification-id');
+    let search = document.getElementById('search');
+    let timer;
+
+    for(i=0;i<icons.length;i++){
+        let icon = icons[i]
+        icon.onclick = function(e){
+            let name = this.getAttribute('data-name');
+
+            copier.value = name;
+            copier.select();
+            copier.setSelectionRange(0, 99999)
+            document.execCommand('copy');
+
+            notificationText.innerHTML = name;
+            animateNotification();
+            e.preventDefault();
+        }
+    }
+
+    function animateNotification(){
+        window.clearTimeout(timer);
+        search.focus();
+        notification.classList.add('show');
+        timer = window.setTimeout(function(){
+            notification.classList.remove('show');
+        }, 3000);
+    }
+
+    search.addEventListener('keyup', function(){
+        let filter = search.value.toUpperCase();
+        let wrapper = document.getElementById('icons');
+        let icon = wrapper.getElementsByTagName('div');
+
+        for (i = 0; i < icon.length; i++) {
+            compareText = icon[i].textContent || icon[i].innerText;
+            if (compareText.toUpperCase().indexOf(filter) > -1) {
+                icon[i].style.display = '';
+            } else {
+                icon[i].style.display = 'none';
+            }
+        }
+    });
+
+    search.focus();
+
+</script>
+</body>
+</html>
