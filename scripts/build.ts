@@ -1,11 +1,15 @@
 import { execSync } from 'child_process'
 import fs from 'fs-extra'
 import pkg from '../package.json'
-import sets from './sets'
+import { sets } from './sets'
+// @ts-ignore
+import gen from 'webfonts-generator'
 
 const e = (cmd: string) => execSync(cmd, { stdio: 'inherit' })
 
 for (const set of sets) {
+  const START_CODEPOINT = 0xe000
+
   const name = set.name
   const displayName = set.display
 
@@ -15,7 +19,7 @@ for (const set of sets) {
   fs.ensureDirSync(`build/${name}`)
   fs.emptyDirSync(`build/${name}`)
 
-  Object.entries(set.icons).forEach(([k, v]) => {
+  const icons = Object.entries(set.icons).map(([k, v]) => {
     v = v || k
     k = k.replace('codicon:', '')
     const [id, name] = v.split(':')
@@ -26,24 +30,30 @@ for (const set of sets) {
       console.error(v)
     }
     fs.writeFileSync(`temp/icons/${k}.svg`, `<svg width="${height}" height="${height}" viewBox="0 0 ${height} ${height}" xmlns="http://www.w3.org/2000/svg" fill="currentColor">${body}</svg>`, 'utf-8')
+    return k
   })
 
   e('npx svgo -f temp/icons/ --config svgo-config.yml')
-  e(`npx icon-font-generator temp/icons/*.svg
-          -o temp/dist
-          -n ${name}
-          -p ${name}
-          --csstp template/styles.hbs
-          --height=1000
-          --center
-          --codepoints template/mapping.json
-          --json false
-          --types 'ttf'
-          --html true
-          --htmltp template/preview.hbs
-`.split('\n').map(i=>i.trim()).join(' ')
+
+  gen(
+    {
+      files: icons.map((i) => `./temp/icons/${i}.svg`),
+      dest: `./temp/dist`,
+      types: ['woff'],
+      fontName: name,
+      css: false,
+      html: true,
+      startCodepoint: START_CODEPOINT,
+    },
+    (error: any) => {
+      if (error) {
+        console.log('Font creation failed.', error)
+        process.exit(1)
+      }
+
+      fs.copyFileSync(`./temp/dist/${name}.woff`, `build/${name}/${name}.woff`)
+    }
   )
-  e(`cp temp/dist/${name}.ttf build/${name}/${name}.ttf`)
 
   fs.writeJSONSync(
     `build/${name}/${name}.json`,
@@ -53,151 +63,16 @@ for (const set of sets) {
           id: name,
           src: [
             {
-              path: `./${name}.ttf`,
-              format: 'truetype',
+              path: `./${name}.woff`,
+              format: 'woff',
             },
           ],
           weight: 'normal',
           style: 'normal',
         },
       ],
-      iconDefinitions: {
-        files: {
-          fontCharacter: '\\2710',
-        },
-        search: {
-          fontCharacter: '\\2711',
-        },
-        'source-control': {
-          fontCharacter: '\\2712',
-        },
-        'git-branch': {
-          fontCharacter: '\\2712',
-        },
-        'debug-alt': {
-          fontCharacter: '\\2713',
-        },
-        extensions: {
-          fontCharacter: '\\2714',
-        },
-        account: {
-          fontCharacter: '\\2715',
-        },
-        'settings-gear': {
-          fontCharacter: '\\2716',
-        },
-        'new-file': {
-          fontCharacter: '\\2717',
-        },
-        'new-folder': {
-          fontCharacter: '\\2718',
-        },
-        refresh: {
-          fontCharacter: '\\2719',
-        },
-        'collapse-all': {
-          fontCharacter: '\\271a',
-        },
-        'editor-layout': {
-          fontCharacter: '\\271b',
-        },
-        save: {
-          fontCharacter: '\\271c',
-        },
-        'save-all': {
-          fontCharacter: '\\271c',
-        },
-        error: {
-          fontCharacter: '\\2720',
-        },
-        'split-horizontal': {
-          fontCharacter: '\\271e',
-        },
-        'split-vertical': {
-          fontCharacter: '\\271f',
-        },
-        'compare-changes': {
-          fontCharacter: '\\2721',
-        },
-        'clear-all': {
-          fontCharacter: '\\2722',
-        },
-        warning: {
-          fontCharacter: '\\2723',
-        },
-        bell: {
-          fontCharacter: '\\2724',
-        },
-        sync: {
-          fontCharacter: '\\2725',
-        },
-        'light-bulb': {
-          fontCharacter: '\\2726',
-        },
-        filter: {
-          fontCharacter: '\\2727',
-        },
-        gear: {
-          fontCharacter: '\\2728',
-        },
-        'debug-start': {
-          fontCharacter: '\\2729',
-        },
-        'debug-stop': {
-          fontCharacter: '\\272a',
-        },
-        'debug-pause': {
-          fontCharacter: '\\409',
-        },
-        'debug-restart': {
-          fontCharacter: '\\272b',
-        },
-        'debug-disconnect': {
-          fontCharacter: '\\404',
-        },
-        'debug-step-into': {
-          fontCharacter: '\\405',
-        },
-        'debug-step-out': {
-          fontCharacter: '\\406',
-        },
-        'debug-step-back': {
-          fontCharacter: '\\407',
-        },
-        'debug-step-over': {
-          fontCharacter: '\\408',
-        },
-        'debug-continue': {
-          fontCharacter: '\\40a',
-        },
-        trash: {
-          fontCharacter: '\\40c',
-        },
-        add: {
-          fontCharacter: '\\40d',
-        },
-        'close-all': {
-          fontCharacter: '\\40e',
-        },
-        'activate-breakpoints': {
-          fontCharacter: '\\40f',
-        },
-        'remote-explorer': {
-          fontCharacter: '\\0410',
-        },
-        'symbol-function': {
-          fontCharacter: '\\0411',
-        },
-        'symbol-event': {
-          fontCharacter: '\\0412',
-        },
-        'symbol-variable': {
-          fontCharacter: '\\0413',
-        },
-        remote: {
-          fontCharacter: '\\0414',
-        },
-      },
+
+      iconDefinitions: Object.fromEntries(icons.map((i, idx) => [i, { fontCharacter: formatUnicode(START_CODEPOINT + idx) }])),
     },
     { spaces: 2 }
   )
@@ -216,7 +91,7 @@ for (const set of sets) {
         vscode: pkg.engines.vscode,
       },
       license: 'MIT',
-      keywords: ['icon', 'theme', 'product'],
+      keywords: ['icon', 'theme', 'product', 'product-icon-theme'],
       extensionKind: ['ui'],
       contributes: {
         productIconThemes: [
@@ -243,4 +118,8 @@ for (const set of sets) {
 
   fs.copySync('README.md', `build/${name}/README.md`)
   fs.copySync('icon.png', `build/${name}/icon.png`)
+}
+
+function formatUnicode(unicode: number) {
+  return '\\' + unicode.toString(16)
 }

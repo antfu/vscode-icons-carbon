@@ -1,22 +1,30 @@
-export default [
+import { Codicon } from "./ids";
+
+export interface IconSet {
+  name: string,
+  display: string,
+  icons: Partial<Record<Codicon, string>>
+}
+
+export const sets: IconSet[] = [
   {
     name: 'icons-carbon',
     display: 'Carbon',
     icons: {
       'codicon:files': 'carbon:folder',
       'codicon:search': 'carbon:search',
-      'codicon:scm': 'carbon:branch',
-      'codicon:debug': 'carbon:debug',
+      'codicon:source-control': 'carbon:branch',
+      'codicon:bug': 'carbon:debug',
       'codicon:extensions': 'carbon:container-software',
-      'codicon:person': 'carbon:user',
-      'codicon:settings': 'carbon:settings-adjust',
+      'codicon:account': 'carbon:user',
+      'codicon:gear': 'carbon:settings',
+      'codicon:settings-gear': 'carbon:settings-adjust',
       'codicon:new-file': 'carbon:new-tab',
       'codicon:new-folder': 'carbon:folder-add',
-      'codicon:refresh': 'carbon:restart',
+      'codicon:refresh': 'carbon:renew',
       'codicon:collapse-all': 'carbon:minimize',
-      'codicon:editor-layout': 'carbon:transpose',
       'codicon:save': 'carbon:save',
-      'codicon:cancel': 'carbon:close',
+      'codicon:x': 'carbon:close',
       'codicon:split-horizontal': 'carbon:open-panel-right',
       'codicon:split-vertical': 'carbon:open-panel-bottom',
       'codicon:error': 'carbon:error',
@@ -27,27 +35,18 @@ export default [
       'codicon:sync': 'carbon:renew',
       'codicon:lightbulb': 'carbon:idea',
       'codicon:filter': 'carbon:filter',
-      'codicon:gear': 'carbon:settings',
       'codicon:play': 'carbon:play',
-      'codicon:stop': 'carbon:stop',
+      'codicon:primitive-square': 'carbon:stop',
       'codicon:debug-restart': 'carbon:restart',
-      'codicon:debug-disconnect': '',
-      'codicon:debug-step-in': 'mdi:debug-step-into',
-      'codicon:debug-step-out': '',
-      'codicon:debug-step-back': '',
-      'codicon:debug-step-over': '',
-      'codicon:debug-pause': 'carbon:pause',
-      'codicon:debug-continue': '',
-      'codicon:debug-reverse-continue': '',
       'codicon:trash': 'carbon:delete',
-      'codicon:add': 'carbon:add-alt',
       'codicon:close-all': 'carbon:close-outline',
-      'codicon:activate-breakpoints': 'carbon:boolean',
-      'codicon:remote-explorer': 'carbon:cloud-ceiling',
-      'codicon:symbol-constructor': 'carbon:cube',
       'codicon:symbol-event': 'carbon:flash',
       'codicon:symbol-variable': 'carbon:3d-mpr-toggle',
-      'codicon:remote': '',
+      'codicon:check': 'carbon:checkmark',
+      'codicon:checklist': 'carbon:list-checked',
+      'codicon:go-to-file': 'carbon:script-reference',
+      'codicon:discard': 'carbon:undo',
+      'codicon:ellipsis': 'carbon:overflow-menu-horizontal'
     },
   },
 ]
