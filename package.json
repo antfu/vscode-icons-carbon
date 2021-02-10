@@ -6,7 +6,7 @@
   },
   "scripts": {
     "build": "esno scripts/build.ts",
-    "release": "npx bumpp --tag --commit --push && cd build/icons-carbon && vsce publish"
+    "release": "npx bumpp --tag --commit --push && npm run build && cd build/icons-carbon && vsce publish"
   },
   "devDependencies": {
     "@antfu/ni": "^0.5.3",
