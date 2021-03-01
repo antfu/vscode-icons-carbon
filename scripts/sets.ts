@@ -41,6 +41,7 @@ export const sets: IconSet[] = [
       'codicon:trash': 'carbon:delete',
       'codicon:close-all': 'carbon:close-outline',
       'codicon:symbol-event': 'carbon:flash',
+      'codicon:zap': 'carbon:flash',
       'codicon:symbol-variable': 'carbon:3d-mpr-toggle',
       'codicon:check': 'carbon:checkmark',
       'codicon:checklist': 'carbon:list-checked',
