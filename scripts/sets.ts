@@ -1,9 +1,9 @@
-import { Codicon } from "./ids";
+import { Codicon, Carbon } from "./ids";
 
 export interface IconSet {
   name: string,
   display: string,
-  icons: Partial<Record<Codicon, string>>
+  icons: Partial<Record<Codicon, Carbon>>
 }
 
 export const sets: IconSet[] = [
