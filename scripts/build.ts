@@ -44,6 +44,8 @@ for (const set of sets) {
       css: false,
       html: true,
       startCodepoint: START_CODEPOINT,
+      fontHeight: 1000,
+      normalize: true,
     },
     (error: any) => {
       if (error) {
