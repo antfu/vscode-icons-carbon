@@ -15,6 +15,7 @@ export const sets: IconSet[] = [
       'codicon:search': 'carbon:search',
       'codicon:source-control': 'carbon:branch',
       'codicon:bug': 'carbon:debug',
+      'codicon:debug': 'carbon:debug',
       'codicon:extensions': 'carbon:container-software',
       'codicon:account': 'carbon:user',
       'codicon:gear': 'carbon:settings',
