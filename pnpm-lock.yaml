@@ -1,6 +1,6 @@
 devDependencies:
   '@antfu/ni': 0.5.3
-  '@iconify/json': 1.1.300
+  '@iconify/json': 1.1.313
   '@types/fs-extra': 9.0.6
   esno: 0.4.3
   fs-extra: 9.1.0
@@ -21,10 +21,10 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-KSXwiT86UH3NRRvYs+eTQjr2ObGf9kg4WvdSYVt5HMIuT1kswNquY+9vtpom9k3440lJCZUFY3aK+VfAus9GsA==
-  /@iconify/json/1.1.300:
+  /@iconify/json/1.1.313:
     dev: true
     resolution:
-      integrity: sha512-Zg1xQHWoKkK4dZJzSOXMd4Jqk8G+iTJg1gOZEMjv4dxPT6idORuIfYkcdGhLD6Ky8d7BkoArQJzDGvQavpbz/w==
+      integrity: sha512-gv00rSX4apKE0i/fUjXp5+sBb8LHzzdJqrXkBNVby7Nl7yzRqeQ/EyY+7ixtSpEu3f1P/co/vrgdbZN6wlw6DA==
   /@types/fs-extra/9.0.6:
     dependencies:
       '@types/node': 14.14.25
@@ -1172,7 +1172,7 @@ packages:
       tough-cookie: 2.5.0
       tunnel-agent: 0.6.0
       uuid: 3.4.0
-    deprecated: 'request has been deprecated, see https://github.com/request/request/issues/3142'
+    deprecated: request has been deprecated, see https://github.com/request/request/issues/3142
     dev: true
     engines:
       node: '>= 6'
@@ -1624,7 +1624,7 @@ packages:
       integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 specifiers:
   '@antfu/ni': ^0.5.3
-  '@iconify/json': ^1.1.300
+  '@iconify/json': ^1.1.313
   '@types/fs-extra': ^9.0.6
   esno: ^0.4.3
   fs-extra: ^9.1.0

@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@antfu/ni": "^0.5.3",
-    "@iconify/json": "^1.1.300",
+    "@iconify/json": "^1.1.313",
     "@types/fs-extra": "^9.0.6",
     "esno": "^0.4.3",
     "fs-extra": "^9.1.0",
