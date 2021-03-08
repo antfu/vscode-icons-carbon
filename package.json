@@ -15,7 +15,7 @@
     "esno": "^0.4.6",
     "fs-extra": "^9.1.0",
     "rimraf": "^3.0.2",
-    "svgo": "^2.2.1",
+    "svgo": "^1.3.2",
     "typescript": "^4.2.3",
     "webfonts-generator": "^0.4.0"
   }
