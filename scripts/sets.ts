@@ -340,7 +340,7 @@ export const sets: IconSet[] = [
       // 'codicon:server-environment': 'carbon:',
       // 'codicon:server-process': 'carbon:',
       'codicon:settings': 'carbon:audio-console',
-      'codicon:settings-gear': 'carbon:settings',
+      'codicon:settings-gear': 'carbon:settings-adjust',
       'codicon:shield': 'carbon:manage-protection',
       'codicon:sign-in': 'carbon:login',
       'codicon:sign-out': 'carbon:logout',
