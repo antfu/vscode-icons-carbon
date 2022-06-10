@@ -1,4 +1,4 @@
-plugins:   
+plugins:
   - convertPathData:
       noSpaceAfterFlags: false
   - mergePaths:
@@ -7,5 +7,5 @@ plugins:
       attrs: '*:fill'
   - addAttributesToSVGElement:
       attributes:
-        - fill: 'currentColor'
+        - fill: currentColor
   - removeViewBox: false

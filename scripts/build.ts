@@ -1,14 +1,14 @@
 import { execSync } from 'child_process'
 import fs from 'fs-extra'
+// @ts-expect-error missing types
+import gen from 'webfonts-generator'
 import pkg from '../package.json'
 import { sets } from './sets'
-// @ts-ignore
-import gen from 'webfonts-generator'
 
 const e = (cmd: string) => execSync(cmd, { stdio: 'inherit' })
 
 for (const set of sets) {
-  const START_CODEPOINT = 0xe000
+  const START_CODEPOINT = 0xE000
 
   const name = set.name
   const displayName = set.display
@@ -23,12 +23,13 @@ for (const set of sets) {
     v = v || k
     k = k.replace('codicon:', '')
     const [id, name] = v.split(':')
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const json = require(`@iconify/json/json/${id}.json`)
     const body = json.icons[name]?.body
     const height = json.info.height
-    if (!body) {
+    if (!body)
       console.error(v)
-    }
+
     fs.writeFileSync(`temp/icons/${k}.svg`, `<svg width="${height}" height="${height}" viewBox="0 0 ${height} ${height}" xmlns="http://www.w3.org/2000/svg" fill="currentColor">${body}</svg>`, 'utf-8')
     return k
   })
@@ -37,8 +38,8 @@ for (const set of sets) {
 
   gen(
     {
-      files: icons.map((i) => `./temp/icons/${i}.svg`),
-      dest: `./temp/dist`,
+      files: icons.map(i => `./temp/icons/${i}.svg`),
+      dest: './temp/dist',
       types: ['woff'],
       fontName: name,
       css: false,
@@ -54,7 +55,7 @@ for (const set of sets) {
       }
 
       fs.copyFileSync(`./temp/dist/${name}.woff`, `build/${name}/${name}.woff`)
-    }
+    },
   )
 
   fs.writeJSONSync(
@@ -76,13 +77,13 @@ for (const set of sets) {
 
       iconDefinitions: Object.fromEntries(icons.map((i, idx) => [i, { fontCharacter: formatUnicode(START_CODEPOINT + idx) }])),
     },
-    { spaces: 2 }
+    { spaces: 2 },
   )
 
   fs.writeJSONSync(
     `build/${name}/package.json`,
     {
-      name: name,
+      name,
       publisher: 'antfu',
       version: pkg.version,
       displayName: `${displayName} Product Icons`,
@@ -91,6 +92,9 @@ for (const set of sets) {
       categories: ['Themes'],
       engines: {
         vscode: pkg.engines.vscode,
+      },
+      sponsor: {
+        url: 'https://github.com/sponsors/antfu',
       },
       license: 'MIT',
       keywords: ['icon', 'theme', 'product', 'product-icon-theme'],
@@ -115,7 +119,7 @@ for (const set of sets) {
         name: 'Anthony Fu',
       },
     },
-    { spaces: 2 }
+    { spaces: 2 },
   )
 
   fs.copySync('README.md', `build/${name}/README.md`)
@@ -123,5 +127,5 @@ for (const set of sets) {
 }
 
 function formatUnicode(unicode: number) {
-  return '\\' + unicode.toString(16)
+  return `\\${unicode.toString(16)}`
 }

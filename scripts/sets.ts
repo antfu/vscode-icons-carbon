@@ -1,8 +1,8 @@
-import { Codicon } from "./ids";
+import type { Codicon } from './ids'
 
 export interface IconSet {
-  name: string,
-  display: string,
+  name: string
+  display: string
   icons: Partial<Record<Codicon, string>>
 }
 

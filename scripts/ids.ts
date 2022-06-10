@@ -1,5 +1,5 @@
-export type IDS = 
-| 'account' 
+export type IDS =
+| 'account'
 | 'activate-breakpoints'
 | 'add'
 | 'alert'
