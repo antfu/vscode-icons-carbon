@@ -11,16 +11,16 @@
     "release": "npx bumpp --tag --commit --push"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.25.1",
-    "@antfu/ni": "^0.16.2",
-    "@iconify/json": "^2.1.59",
+    "@antfu/eslint-config": "^0.27.0",
+    "@antfu/ni": "^0.18.2",
+    "@iconify/json": "^2.1.119",
     "@types/fs-extra": "^9.0.13",
-    "eslint": "^8.17.0",
+    "eslint": "^8.25.0",
     "esno": "^0.16.3",
     "fs-extra": "^10.1.0",
     "rimraf": "^3.0.2",
     "svgo": "^1.3.2",
-    "typescript": "^4.7.3",
+    "typescript": "^4.8.4",
     "webfonts-generator": "^0.4.0"
   },
   "eslintConfig": {
