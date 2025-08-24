@@ -4,3 +4,4 @@ theme
 icons
 temp
 build
+.env

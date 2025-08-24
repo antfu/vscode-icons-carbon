@@ -1,4 +1,5 @@
-import { execSync } from 'child_process'
+import { execSync } from 'node:child_process'
+import process from 'node:process'
 import fs from 'fs-extra'
 // @ts-expect-error missing types
 import gen from 'webfonts-generator'
@@ -23,7 +24,7 @@ for (const set of sets) {
     v = v || k
     k = k.replace('codicon:', '')
     const [id, name] = v.split(':')
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    // eslint-disable-next-line ts/no-require-imports
     const json = require(`@iconify/json/json/${id}.json`)
     const body = json.icons[name]?.body
     const height = json.info.height
@@ -123,6 +124,7 @@ for (const set of sets) {
   )
 
   fs.copySync('README.md', `build/${name}/README.md`)
+  fs.copySync('LICENSE.md', `build/${name}/LICENSE.md`)
   fs.copySync('icon.png', `build/${name}/icon.png`)
 }
 

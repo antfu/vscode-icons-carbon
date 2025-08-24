@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "esModuleInterop": true,
+    "jsx": "preserve",
+    "lib": ["ESNext"],
+    "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "module": "ESNext",
-    "jsx": "preserve",
-    "lib": ["ESNext"]
+    "strict": true,
+    "esModuleInterop": true
   }
 }

@@ -6,7 +6,6 @@
 
 <p align="center"><a href="https://github.com/carbon-design-system/carbon/tree/main/packages/icons">Carbon</a> Visual Studio Code <a href="https://code.visualstudio.com/api/extension-guides/product-icon-theme">product icon theme</a></p>
 
-
 <p align="center">
 <a href="https://marketplace.visualstudio.com/items?itemName=antfu.icons-carbon" target="__blank"><img src="https://img.shields.io/visual-studio-marketplace/v/antfu.icons-carbon.svg?color=c19999&amp;label=Marketplace&logo=visual-studio-code" alt="Visual Studio Marketplace Version" /></a>
 </p>
