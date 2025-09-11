@@ -29,6 +29,7 @@ export type IDS
   | 'call-incoming'
   | 'call-outgoing'
   | 'case-sensitive'
+  | 'chat-sparkle'
   | 'check'
   | 'check-all'
   | 'checklist'
