@@ -41,6 +41,7 @@ export const sets: IconSet[] = [
       'codicon:call-incoming': 'carbon:phone-incoming',
       'codicon:call-outgoing': 'carbon:phone-outgoing',
       // 'codicon:case-sensitive': 'carbon:',
+      'codicon:chat-sparkle': 'carbon:chat',
       // 'codicon:check': 'carbon:',
       // 'codicon:check-all': 'carbon:',
       'codicon:checklist': 'carbon:list-checked',
