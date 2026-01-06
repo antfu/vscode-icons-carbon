@@ -8,7 +8,6 @@
       "request": "launch",
       "runtimeExecutable": "${execPath}",
       "args": ["--extensionDevelopmentPath=${workspaceRoot}/build/icons-carbon"],
-      "stopOnEntry": false,
       "preLaunchTask": "$(rocket) Build for production"
     }
   ]
