@@ -16,7 +16,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^5.3.0",
     "@antfu/ni": "^25.0.0",
-    "@iconify/json": "^2.2.383",
+    "@iconify/json": "^2.2.425",
     "@types/fs-extra": "^11.0.4",
     "@vscode/vsce": "^3.6.0",
     "bumpp": "^10.2.3",
