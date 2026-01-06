@@ -17,8 +17,8 @@
     },
     {
       "label": "$(rocket) Build for production",
-      "type": "npm",
-      "script": "build"
+      "type": "shell",
+      "command": "pnpm build"
     }
   ]
 }
